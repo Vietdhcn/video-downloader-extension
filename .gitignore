@@ -6,3 +6,6 @@ youtube/probe.json
 downloads/
 youtube/host.log
 youtube/host.log.1
+tools/i18n/strings.json
+tools/i18n/extra.txt
+tools/i18n/missing.txt
