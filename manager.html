@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title data-i18n="video_catcher_trinh_tai_79cu">Video Catcher – Trình tải</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="manager.css">
+</head>
+<body class="manager">
+  <header class="toolbar">
+    <h1 class="brand"><span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></span><span data-i18n="trinh_tai_fhoz">Trình tải</span></h1>
+    <div id="dest" class="dest"></div>
+    <select id="simultaneousVideos" title="Số video tải cùng lúc (các video chia băng thông; video thêm trước tải trước)" data-i18n-title="so_video_tai_cung_1b15" aria-label="Số video tải cùng lúc" data-i18n-aria-label="so_video_tai_cung_1t0d">
+      <option value="1" data-i18n="1_cung_luc_scy1">1 cùng lúc</option>
+      <option value="2" data-i18n="2_cung_luc_1vp6">2 cùng lúc</option>
+      <option value="3" data-i18n="3_cung_luc_1q5q">3 cùng lúc</option>
+      <option value="4" data-i18n="4_cung_luc_siyz">4 cùng lúc</option>
+      <option value="5" data-i18n="5_cung_luc_iu3e">5 cùng lúc</option>
+    </select>
+    <button id="pauseAll" class="icon-btn" hidden title="Tạm dừng tất cả" data-i18n-title="tam_dung_tat_ca_1rpe" aria-label="Tạm dừng tất cả" data-i18n-aria-label="tam_dung_tat_ca_1rpe"></button>
+    <button id="clearDone" class="icon-btn" title="Dọn các mục đã xong (không xóa file)" data-i18n-title="don_cac_muc_da_qrjp" aria-label="Dọn các mục đã xong" data-i18n-aria-label="don_cac_muc_da_17ry">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>
+    </button>
+  </header>
+  <main class="manager-main">
+  <div class="tabs" role="tablist" aria-label="Danh sách" data-i18n-aria-label="danh_sach_1ybz">
+    <button id="tabAll" role="tab" aria-selected="true" data-i18n="tat_ca_al4s">Tất cả</button>
+    <button id="tabErrors" role="tab" aria-selected="false"><span data-i18n="loi_vay3">Lỗi</span> <span id="errCount" class="count" hidden></span></button>
+  </div>
+  <p id="keepOpen" class="banner" hidden>
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+    <span data-i18n="giu_cua_so_nay_mo">Giữ cửa sổ này mở đến khi tải xong</span>
+  </p>
+  <section id="errorsView" class="list errors-view" hidden></section>
+  <section id="jobs" class="list" aria-label="Các video" data-i18n-aria-label="cac_video_n2r8"><div id="emptyState" class="empty empty-state"><b data-i18n="chua_co_video_nao_1jmy">Chưa có video nào</b>Bấm ⬇ trên video để tải</div></section>
+  </main>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="lib/locales/en.js"></script>
+  <script src="lib/locales/vi.js"></script>
+  <script src="lib/i18n.js"></script>
+  <script src="lib/m3u8.js"></script>
+  <script src="lib/mpd.js"></script>
+  <script src="lib/fmp4.js"></script>
+  <script src="lib/mux-mp4.min.js"></script>
+  <script src="lib/native-youtube.js"></script>
+  <script src="lib/errors.js"></script>
+  <script src="manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Video Catcher</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="popup">
+  <header class="top" id="topBar">
+    <h1 class="brand">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></span>
+      Video Catcher
+    </h1>
+    <div class="top-actions">
+      <button id="openManager" class="icon" title="Trình tải" data-i18n-title="trinh_tai_fhoz" aria-label="Mở Trình tải" data-i18n-aria-label="mo_trinh_tai_1wqx">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3M12 4v10m0 0-4-4m4 4 4-4"/></svg>
+      </button>
+      <button id="refresh" class="icon" title="Quét lại trang" data-i18n-title="quet_lai_trang_mdn5" aria-label="Quét lại trang" data-i18n-aria-label="quet_lai_trang_mdn5">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg>
+      </button>
+      <button id="openSettings" class="icon" title="Cài đặt" data-i18n-title="cai_dat_1yk7" aria-label="Cài đặt" data-i18n-aria-label="cai_dat_1yk7">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 12c0-.4 0-.8-.1-1.2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-2-1.2L14.5 3h-5l-.4 2.6a7.6 7.6 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7.4 7.4 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 0 0 2 1.2l.4 2.6h5l.4-2.6a7.6 7.6 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="mainView">
+    <div id="media" class="stack"></div>
+    <button id="clear" class="link" hidden title="Xoá các nguồn đã bắt trên tab này" data-i18n-title="xoa_cac_nguon_da_dz3q" data-i18n="xoa_danh_sach_nguon_z0cc">Xoá danh sách nguồn</button>
+    <details id="recordBox" class="rec-box">
+      <summary>
+        <span class="rec-dot" aria-hidden="true"></span>
+        <span class="rec-title"><b data-i18n="ghi_lai_video_dang_1ilo">Ghi lại video đang phát</b><span id="recSub" data-i18n="khi_khong_tai_duoc_1adm">Khi không tải được</span></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+      </summary>
+      <div id="videos" class="rec-body"></div>
+    </details>
+  </main>
+
+  <main id="settingsView" hidden>
+    <div class="set-head">
+      <button id="closeSettings" class="icon" aria-label="Quay lại" data-i18n-aria-label="quay_lai_rft4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
+      <h1 data-i18n="cai_dat_1yk7">Cài đặt</h1>
+    </div>
+    <div class="set-card">
+      <div class="set-block">
+        <span class="set-text"><b data-i18n="ngon_ngu_lang">Ngôn ngữ</b><small data-i18n="ngon_ngu_sub_lang">Ngôn ngữ giao diện · Interface language</small></span>
+        <div class="segmented" id="langPick" role="group" aria-label="Language">
+          <button data-lang="en" aria-pressed="false">English</button><button data-lang="vi" aria-pressed="false" data-i18n="tieng_viet_1ynt">Tiếng Việt</button>
+        </div>
+      </div>
+      <label class="set-row switch">
+        <span class="set-text"><b data-i18n="nut_tai_tren_video_1cd6">Nút tải trên video</b><small data-i18n="moi_trang_nut_tren_3a51">Mọi trang · nút ⬇ trên trình phát YouTube</small></span>
+        <input type="checkbox" id="overlayAll"><span class="track"><span class="thumb"></span></span>
+      </label>
+      <label class="set-row switch">
+        <span class="set-text"><b data-i18n="tu_dong_luu_exo5">Tự động lưu</b><small data-i18n="bo_tich_moi_video_2mf4">Bỏ tích: mỗi video xong sẽ hỏi thư mục và tên file</small></span>
+        <input type="checkbox" id="autoSave"><span class="track"><span class="thumb"></span></span>
+      </label>
+      <label class="set-row switch">
+        <span class="set-text"><b data-i18n="ten_khoa_hoc_o_x0gb">Tên khoá học ở đầu tên file</b><small data-i18n="udemy_coursera_tat_chi_5klx">Udemy, Coursera · tắt: chỉ tên bài, vd "12. Tên bài.mp4"</small></span>
+        <input type="checkbox" id="prefixCourse"><span class="track"><span class="thumb"></span></span>
+      </label>
+      <label class="set-row switch">
+        <span class="set-text"><b data-i18n="kem_phu_de_thuyet_1mbc">Kèm phụ đề &amp; thuyết minh</b><small data-i18n="tu_tien_ich_song_xfsp">Từ tiện ích "Song Ngữ &amp; Thuyết Minh" (CC and dịch) · hiện lựa chọn trong menu tải</small></span>
+        <input type="checkbox" id="postEnabled"><span class="track"><span class="thumb"></span></span>
+      </label>
+      <label class="set-row switch">
+        <span class="set-text"><b data-i18n="giu_file_phu_de_10jt">Giữ file phụ đề &amp; thuyết minh rời</b><small data-i18n="sau_khi_ghep_giu_1co4">Sau khi ghép: giữ .srt/.ass/.wav cạnh video · tắt: xoá ngay khi xong</small></span>
+        <input type="checkbox" id="postKeep"><span class="track"><span class="thumb"></span></span>
+      </label>
+      <button class="set-row" id="destSettings">
+        <span class="set-text"><b data-i18n="noi_luu_1cof">Nơi lưu</b><small id="destValue">Downloads</small></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+      </button>
+      <div class="set-block">
+        <span class="set-text"><b data-i18n="tai_cung_luc_znn0">Tải cùng lúc</b><small data-i18n="cac_video_chia_bang_1u64">Các video chia băng thông, video thêm trước tải trước</small></span>
+        <div class="segmented" id="concurrency" role="group" aria-label="Số video tải cùng lúc" data-i18n-aria-label="so_video_tai_cung_1t0d">
+          <button data-n="1" aria-pressed="false">1</button><button data-n="2" aria-pressed="false">2</button><button data-n="3" aria-pressed="false">3</button><button data-n="4" aria-pressed="false">4</button><button data-n="5" aria-pressed="false">5</button>
+        </div>
+      </div>
+    </div>
+    <h2 class="set-h"><span data-i18n="trang_da_an_nut_h2">Trang đã ẩn nút</span> <span id="offCount" class="count"></span></h2>
+    <div id="offList" class="set-card"></div>
+    <div class="set-card">
+      <div class="set-row">
+        <span class="set-text"><b data-i18n="bo_tai_youtube_tren_1qo5">Bộ tải YouTube trên máy</b><small id="helperStatus" data-i18n="dang_kiem_tra_1va4">Đang kiểm tra…</small></span>
+      </div>
+    </div>
+    <p id="version" class="hint ver"></p>
+  </main>
+
+  <footer class="bottom" id="footer">
+    <label class="switch" id="siteSwitch">
+      <input type="checkbox" id="overlayToggle"><span class="track"><span class="thumb"></span></span>
+      <span id="siteLabel" data-i18n="nut_tai_tren_trang_gb5b">Nút tải trên trang này</span>
+    </label>
+    <button id="dest" class="chip" title="Nơi lưu – bấm để đổi" data-i18n-title="noi_luu_bam_de_18me">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+      <span id="destLabel">Downloads</span>
+    </button>
+  </footer>
+  <div id="status" class="toast" role="status" hidden><span id="statusText"></span><button id="statusAction" hidden>Xem</button></div>
+  <script src="lib/locales/en.js"></script>
+  <script src="lib/locales/vi.js"></script>
+  <script src="lib/i18n.js"></script>
+  <script src="lib/youtube.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
